@@ -8,6 +8,8 @@ import TakeExam from './pages/TakeExam'
 import Results from './pages/Results'
 import AdminDashboard from './pages/AdminDashboard'
 import CreateExam from './pages/CreateExam'
+import Leaderboard from './pages/Leaderboard'
+import Profile from './pages/Profile'
 import PrivateRoute from './components/PrivateRoute'
 
 function App() {
@@ -51,6 +53,18 @@ function App() {
           <Route path="/admin/create-exam" element={
             <PrivateRoute adminOnly>
               <CreateExam />
+            </PrivateRoute>
+          } />
+          
+          <Route path="/leaderboard" element={
+            <PrivateRoute>
+              <Leaderboard />
+            </PrivateRoute>
+          } />
+          
+          <Route path="/profile" element={
+            <PrivateRoute>
+              <Profile />
             </PrivateRoute>
           } />
           

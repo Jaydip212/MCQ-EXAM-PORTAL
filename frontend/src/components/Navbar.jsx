@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { LogOut, User, BookOpen, BarChart3, Settings } from 'lucide-react'
+import { LogOut, BookOpen, Trophy, UserCircle } from 'lucide-react'
+import Notifications from './Notifications'
 
 const Navbar = () => {
   const { user, logout, isAdmin } = useAuth()
@@ -23,27 +24,37 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center space-x-4">
-            <Link to="/dashboard" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+            <Link to="/dashboard" className="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">
               Dashboard
             </Link>
-            <Link to="/exams" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+            <Link to="/exams" className="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">
               Exams
             </Link>
-            <Link to="/results" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+            <Link to="/results" className="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">
               Results
             </Link>
+            <Link to="/leaderboard" className="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition flex items-center gap-1">
+              <Trophy className="h-4 w-4" />
+              Leaderboard
+            </Link>
             {isAdmin && (
-              <Link to="/admin" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+              <Link to="/admin" className="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">
                 Admin
               </Link>
             )}
             
-            <div className="flex items-center space-x-2 border-l pl-4">
-              <User className="h-5 w-5 text-gray-600" />
-              <span className="text-sm text-gray-700">{user?.username}</span>
+            <div className="flex items-center space-x-3 border-l pl-4">
+              <Notifications />
+              
+              <Link to="/profile" className="flex items-center gap-2 text-gray-700 hover:text-indigo-600 transition">
+                <UserCircle className="h-5 w-5" />
+                <span className="text-sm font-medium">{user?.username}</span>
+              </Link>
+              
               <button
                 onClick={handleLogout}
-                className="ml-2 p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                title="Logout"
               >
                 <LogOut className="h-5 w-5" />
               </button>

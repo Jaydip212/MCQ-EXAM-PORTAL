@@ -14,7 +14,10 @@ const ExamList = () => {
 
   const fetchExams = async () => {
     try {
-      const response = await axios.get('/api/exams')
+      const token = localStorage.getItem('token')
+      const response = await axios.get('http://127.0.0.1:8000/api/exams/', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
       setExams(response.data)
     } catch (error) {
       console.error('Error fetching exams:', error)

@@ -21,9 +21,14 @@ const Dashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
+      const token = localStorage.getItem('token')
       const [examsRes, attemptsRes] = await Promise.all([
-        axios.get('/api/exams'),
-        axios.get('/api/students/my-attempts')
+        axios.get('http://127.0.0.1:8000/api/exams/', {
+          headers: { Authorization: `Bearer ${token}` }
+        }),
+        axios.get('http://127.0.0.1:8000/api/students/my-attempts/', {
+          headers: { Authorization: `Bearer ${token}` }
+        })
       ])
 
       const completedAttempts = attemptsRes.data.filter(a => a.status === 'completed')

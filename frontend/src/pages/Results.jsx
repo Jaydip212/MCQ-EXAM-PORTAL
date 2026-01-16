@@ -13,7 +13,10 @@ const Results = () => {
 
   const fetchResults = async () => {
     try {
-      const response = await axios.get('/api/students/my-attempts')
+      const token = localStorage.getItem('token')
+      const response = await axios.get('http://127.0.0.1:8000/api/students/my-attempts/', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
       const completed = response.data.filter(a => a.status === 'completed')
       setAttempts(completed)
     } catch (error) {
